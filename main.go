@@ -15,7 +15,7 @@ func main() {
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
-	//web.Hello()
+	//web
 	router.GET("/welcome", func(context *gin.Context) {
 		firstname := context.DefaultQuery("firstname", "Guest")
 		lastname := context.Query("lastname") // shortcut for c.Request.URL.Query().Get("lastname")

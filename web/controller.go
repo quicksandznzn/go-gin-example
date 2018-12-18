@@ -1,6 +1,8 @@
 // Created by quicksandzn@gmail.com on 2018/12/18
 package web
 
-func Hello() string {
-	return "hello"
+import "github.com/gin-gonic/gin"
+
+func Welcome(context *gin.Context)  {
+
 }
