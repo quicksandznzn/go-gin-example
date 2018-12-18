@@ -4,7 +4,7 @@ package main
 import (
 	"log"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"github.com/quicksandznzn/go-gin-example/web"
 )
 
 
@@ -15,12 +15,8 @@ func main() {
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware
 	router := gin.Default()
-	//web
-	router.GET("/welcome", func(context *gin.Context) {
-		firstname := context.DefaultQuery("firstname", "Guest")
-		lastname := context.Query("lastname") // shortcut for c.Request.URL.Query().Get("lastname")
-		context.String(http.StatusOK, "Hello %s %s", firstname, lastname)
-	})
+
+	router.GET("/welcome", web.Welcome)
 	//router.POST("/somePost", posting)
 	//router.PUT("/somePut", putting)
 	//router.DELETE("/someDelete", deleting)
