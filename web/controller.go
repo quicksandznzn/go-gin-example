@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"github.com/gin-gonic/gin/binding"
-	"../db"
+	"github.com/quicksandznzn/go-gin-example/db"
 )
 
 type Book struct {
