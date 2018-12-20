@@ -2,22 +2,17 @@
 package main
 
 import (
-	"log"
 	"github.com/gin-gonic/gin"
-	"github.com/quicksandznzn/go-gin-example/web"
+	//"github.com/quicksandznzn/go-gin-example/web"
+	"./web"
 )
 
 
 func main() {
-	// Disable Console Color
-	// gin.DisableConsoleColor()
-
-	// Creates a gin router with default middleware:
-	// logger and recovery (crash-free) middleware
 	router := gin.Default()
-
 	router.GET("/welcome", web.Welcome)
-	//router.POST("/somePost", posting)
+	router.POST("/insert", web.Insert)
+	router.GET("/getById", web.GetById)
 	//router.PUT("/somePut", putting)
 	//router.DELETE("/someDelete", deleting)
 	//router.PATCH("/somePatch", patching)
@@ -32,9 +27,3 @@ func main() {
 }
 
 
-func failOnError(err error, msg string) {
-	if err != nil {
-		log.Fatalf("%s: %s", msg, err)
-		panic(err)
-	}
-}

@@ -4,10 +4,29 @@ package web
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"github.com/gin-gonic/gin/binding"
+	"../db"
 )
 
-func Welcome(context *gin.Context)  {
-	firstname := context.DefaultQuery("firstname", "Guest")
-	lastname := context.Query("lastname") // shortcut for c.Request.URL.Query().Get("lastname")
-	context.String(http.StatusOK, "Hello %s %s", firstname, lastname)
+type Book struct {
+	Name string `json:"name" binding:"required"`
+}
+
+func Welcome(context *gin.Context) {
+	context.String(http.StatusOK, "welcome")
+}
+
+func Insert(context *gin.Context) {
+	var book Book
+	if context.BindWith(&book, binding.JSON) == nil {
+		context.JSON(http.StatusOK, gin.H{"JSON=== status": "you are logged in"})
+	} else {
+		context.JSON(http.StatusInternalServerError, gin.H{"msg": "binding json error"})
+	}
+
+}
+
+func GetById(context *gin.Context) {
+	id := context.Query("id")
+	context.JSON(http.StatusOK,db.QueryById(id))
 }
