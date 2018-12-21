@@ -2,24 +2,21 @@
 package web
 
 import (
-	"github.com/gin-gonic/gin"
-	"net/http"
-	"github.com/gin-gonic/gin/binding"
 	"../db"
+	"../request"
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"net/http"
 )
-
-type Book struct {
-	Name string `json:"name" binding:"required"`
-}
 
 func Welcome(context *gin.Context) {
 	context.String(http.StatusOK, "welcome")
 }
 
 func Insert(context *gin.Context) {
-	var book Book
+	var book request.Book
 	if context.BindWith(&book, binding.JSON) == nil {
-		context.JSON(http.StatusOK, gin.H{"JSON=== status": "you are logged in"})
+		context.JSON(http.StatusOK, db.Insert(book))
 	} else {
 		context.JSON(http.StatusInternalServerError, gin.H{"msg": "binding json error"})
 	}
@@ -28,5 +25,5 @@ func Insert(context *gin.Context) {
 
 func GetById(context *gin.Context) {
 	id := context.Query("id")
-	context.JSON(http.StatusOK,db.QueryById(id))
+	context.JSON(http.StatusOK, db.QueryById(id))
 }

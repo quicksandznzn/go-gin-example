@@ -6,7 +6,7 @@ import (
 )
 
 type Result struct {
-	Data interface{}
+	Data   interface{}
 	Status string
 }
 

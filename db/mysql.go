@@ -3,10 +3,10 @@ package db
 
 import (
 	"database/sql"
-	"io/ioutil"
-	"gopkg.in/yaml.v2"
-	"log"
 	_ "github.com/go-sql-driver/mysql"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
+	"log"
 )
 
 type Config struct {
