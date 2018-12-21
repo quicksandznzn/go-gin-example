@@ -2,37 +2,32 @@
 package db
 
 import (
-	"database/sql"
-	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 var db = dbInit()
 
 type Book struct {
-	Id              sql.NullInt64
-	Title          sql.NullString
-	Author            sql.NullString
-
+	Id     int
+	Title  string
+	Author string
 }
 
-
-func QueryById(id string) gin.H{
+func QueryById(id string) Result {
 	var book Book
-	var result gin.H
-
+	var result Result
 	row := db.QueryRow("select id,title,author from book where id=?", id)
-	err :=row.Scan(&book.Id,&book.Title,&book.Author)
+	err := row.Scan(&book.Id, &book.Title, &book.Author)
 
 	if checkError(err) {
-		result = gin.H{
-			"data":   nil,
-			"status": "failed",
+		result = Result{
+			Data:   nil,
+			Status: "fail",
 		}
 	} else {
-		result = gin.H{
-			"data":   book,
-			"status": "ok",
+		result = Result{
+			Data:   book,
+			Status: "ok",
 		}
 	}
 

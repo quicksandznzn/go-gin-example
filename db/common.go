@@ -5,7 +5,10 @@ import (
 	"log"
 )
 
-
+type Result struct {
+	Data interface{}
+	Status string
+}
 
 func checkError(err error) bool {
 	if err != nil {
